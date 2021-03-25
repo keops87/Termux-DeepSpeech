@@ -102,9 +102,9 @@ recognize() {
 
     if [[ "$DEEPSPEECH_VERSION" == "0.5.1" ]]; then
         ./deepspeech-bin/deepspeech --model ./models/output_graph.tflite --alphabet ./models/alphabet.txt --lm ./models/lm.binary --trie ./models/trie --audio ./tmp.wav 2>&1 | tail -1
-    else if [[ "$DEEPSPEECH_VERSION" == "0.6.0" ]]; then
+    elif [[ "$DEEPSPEECH_VERSION" == "0.6.0" ]]; then
         ./deepspeech-bin/deepspeech --model ./models/output_graph.tflite --lm ./models/lm.binary --trie ./models/trie --audio ./tmp.wav 2>&1 | tail -1
-    else if [[ "$DEEPSPEECH_VERSION" == "0.9.3" ]]; then
+    elif [[ "$DEEPSPEECH_VERSION" == "0.9.3" ]]; then
         ./deepspeech-bin/deepspeech --model ./models/output_graph.tflite --scorer ./models/kenlm.scorer --audio ./tmp.wav 2>&1 | tail -1
     fi
     rm -f ./tmp.wav
