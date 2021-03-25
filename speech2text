@@ -1,5 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
-DEEPSPEECH_VERSION=0.6.0
+DEEPSPEECH_VERSION=0.9.3
 SPEECH_TIME=2
 
 ARCH="$(uname -m)"
