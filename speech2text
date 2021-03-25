@@ -54,9 +54,10 @@ download_example_audio() {
 
 download_models() {
     rm -rf ./models
-    wget "https://github.com/common-voice/commonvoice-fr/releases/download/fr-v0.6/model_tflite_fr.tar.xz" -q --show-progress
-    mv ./model_tflite_fr.tar.xz ./models
+    mkdir ./models
     cd ./models
+    wget "https://github.com/common-voice/commonvoice-fr/releases/download/fr-v0.6/model_tflite_fr.tar.xz" -q --show-progress
+    echo "Extracting ./model_tflite_fr.tar.xz ..."
     tar xf ./model_tflite_fr.tar.xz
     rm -f ./model_tflite_fr.tar.xz
     cd ..
