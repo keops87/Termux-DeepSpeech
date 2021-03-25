@@ -56,7 +56,7 @@ download_models() {
     rm -rf ./models
     wget "https://github.com/common-voice/commonvoice-fr/releases/download/fr-v0.6/model_tflite_fr.tar.xz" -q --show-progress
     mv ./model_tflite_fr.tar.xz ./models
-    tar xz ./models/model_tflite_fr.tar.xz
+    tar xf ./models/model_tflite_fr.tar.xz
     rm -rf ./models/model_tflite_fr.tar.xz
     # rm -f ./._*
     # rm -f ./models/._*
