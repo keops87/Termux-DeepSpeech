@@ -76,7 +76,7 @@ fi
 
 DETECTED_DEEPSPEECH_VERSION=$(LD_LIBRARY_PATH="$LD_LIBRARY_PATH" ./deepspeech-bin/deepspeech --version 2>&1 | grep DeepSpeech | cut -d "v" -f2 | cut -d "-" -f1)
 
-if [ "$DEEPSPEECH_VERSION" != "$DETECTED_DEEPSPEECH_VERSION" ]; then
+if [ "DeepSpeech $DEEPSPEECH_VERSION" != "$DETECTED_DEEPSPEECH_VERSION" ]; then
     echo "Versions doesn't match. Downloading deepspeech, example-audio and models..."
     download_deepspeech
     download_example_audio
@@ -112,6 +112,7 @@ recognize() {
     elif [[ "$DEEPSPEECH_VERSION" == "0.6.0" ]]; then
         ./deepspeech-bin/deepspeech --model ./models/output_graph.tflite --lm ./models/lm.binary --trie ./models/trie --audio ./tmp.wav 2>&1 | tail -1
     elif [[ "$DEEPSPEECH_VERSION" == "0.9.3" ]]; then
+    echo "Using DeepSpeech $DEEPSPEECH_VERSION. Let's talk ..."
         ./deepspeech-bin/deepspeech --model ./models/output_graph.tflite --scorer ./models/kenlm.scorer --audio ./tmp.wav 2>&1 | tail -1
     fi
     rm -f ./tmp.wav
