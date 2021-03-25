@@ -67,7 +67,9 @@ download_models() {
     # rm -f ./models/._*
 }
 ensure_requirements_installed
-if [ ! -e ./deepspeech-bin/deepspeech ]; then
+if [ -f ./deepspeech-bin/deepspeech ]; then
+    echo "DeepSpeech loaded."
+else
     echo "DeepSpeech doesn't found. Downloading ..."
     download_deepspeech
 fi
@@ -83,7 +85,7 @@ fi
 
 ls ./audio/*.wav &> /dev/null || download_example_audio
 
-if [ ! -e ./models/output_graph.tflite ]; then
+if [ ! -f ./models/output_graph.tflite ]; then
     echo "Models doesn't found. Downloading ..."
     download_models
 fi
