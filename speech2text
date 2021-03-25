@@ -54,10 +54,8 @@ download_example_audio() {
 
 download_models() {
     rm -rf ./models
-    wget "https://github.com/mozilla/DeepSpeech/releases/download/v${DEEPSPEECH_VERSION}/deepspeech-${DEEPSPEECH_VERSION}-models.tar.gz" -O ./models.tar.gz -q --show-progress
-    echo "Extracting ./models.tar.gz ..."
-    tar xf ./models.tar.gz
-    rm -f ./models.tar.gz
+    wget "https://github.com/mozilla/DeepSpeech/releases/download/v${DEEPSPEECH_VERSION}/deepspeech-${DEEPSPEECH_VERSION}-models.tlite" -q --show-progress
+    wget "https://github.com/mozilla/DeepSpeech/releases/download/v${DEEPSPEECH_VERSION}/deepspeech-${DEEPSPEECH_VERSION}-models.pbmm" -q --show-progress
     mv ./deepspeech-*-models ./models
     rm -f ./._*
     rm -f ./models/._*
