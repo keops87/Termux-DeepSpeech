@@ -39,9 +39,7 @@ download_deepspeech() {
     rm -rf ./deepspeech-bin
     mkdir deepspeech-bin
     cd ./deepspeech-bind
-    deepspeech_url="https://github.com/mozilla/DeepSpeech/releases/download/v${DEEPSPEECH_VERSION}/native_client.${ARCH}.cpu.android.tar.xz"
-    echo $deepspeech_url
-    wget deepspeech_url -O ./native_client.tar.xz -q --show-progress
+    wget "https://github.com/mozilla/DeepSpeech/releases/download/v${DEEPSPEECH_VERSION}/native_client.${ARCH}.cpu.android.tar.xz" -O ./native_client.tar.xz -q --show-progress
     echo "Extracting ./native_client.tar.xz ..."
     tar xJf ./native_client.tar.xz
     rm -f ./native_client.tar.xz
