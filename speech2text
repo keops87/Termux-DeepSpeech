@@ -37,13 +37,13 @@ ensure_requirements_installed() {
 }
 download_deepspeech() {
     rm -rf ./deepspeech-bin
-    mkdir ./deepspeech-bin
+    mkdir deepspeech-bin
     cd ./deepspeech-bind
     deepspeech_url="https://github.com/mozilla/DeepSpeech/releases/download/v${DEEPSPEECH_VERSION}/native_client.${ARCH}.cpu.android.tar.xz"
     echo $deepspeech_url
     wget deepspeech_url -O ./native_client.tar.xz -q --show-progress
     echo "Extracting ./native_client.tar.xz ..."
-    tar xf ./native_client.tar.xz
+    tar xJf ./native_client.tar.xz
     rm -f ./native_client.tar.xz
     cd ..
 }
@@ -62,7 +62,7 @@ download_models() {
     cd ./models
     wget "https://github.com/common-voice/commonvoice-fr/releases/download/fr-v0.6/model_tflite_fr.tar.xz" -q --show-progress
     echo "Extracting ./model_tflite_fr.tar.xz ..."
-    tar xf ./model_tflite_fr.tar.xz
+    tar xJf ./model_tflite_fr.tar.xz
     rm -f ./model_tflite_fr.tar.xz
     cd ..
     # rm -f ./._*
