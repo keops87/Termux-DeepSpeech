@@ -67,9 +67,7 @@ download_models() {
     # rm -f ./models/._*
 }
 ensure_requirements_installed
-if [ -f ./deepspeech-bin/deepspeech ]; then
-    echo "DeepSpeech loaded."
-else
+if [ ! -f ./deepspeech-bin/deepspeech ]; then
     echo "DeepSpeech doesn't found. Downloading ..."
     download_deepspeech
 fi
@@ -95,6 +93,7 @@ fi
 mic_listen() {
     rm -f ./tmp.mp4
     rm -f ./tmp.wav
+    echo "Using DeepSpeech $DEEPSPEECH_VERSION. Let's talk ..."
     OUTPUT="$(termux-microphone-record -f ./tmp.mp4 -l $SPEECH_TIME -r 16000 -c 1 -e amr_nb)"
     if [[ "$OUTPUT" =~ "Recording error: null" ]]; then
         termux-notification --sound -t "Speech Recognition Error" -c "Can't access the mic. Make sure not other app is using the mic."
@@ -112,7 +111,6 @@ recognize() {
     elif [[ "$DEEPSPEECH_VERSION" == "0.6.0" ]]; then
         ./deepspeech-bin/deepspeech --model ./models/output_graph.tflite --lm ./models/lm.binary --trie ./models/trie --audio ./tmp.wav 2>&1 | tail -1
     elif [[ "$DEEPSPEECH_VERSION" == "0.9.3" ]]; then
-    echo "Using DeepSpeech $DEEPSPEECH_VERSION. Let's talk ..."
         ./deepspeech-bin/deepspeech --model ./models/output_graph.tflite --scorer ./models/kenlm.scorer --audio ./tmp.wav 2>&1 | tail -1
     fi
     rm -f ./tmp.wav
