@@ -38,8 +38,10 @@ ensure_requirements_installed() {
 download_deepspeech() {
     rm -rf ./deepspeech-bin
     mkdir ./deepspeech-bin
-    cd ./deepspeech-bin
-    wget "https://github.com/mozilla/DeepSpeech/releases/download/v${DEEPSPEECH_VERSION}/native_client.${ARCH}.cpu.android.tar.xz" -O ./native_client.tar.xz -q --show-progress
+    cd ./deepspeech-bind
+    deepspeech_url="https://github.com/mozilla/DeepSpeech/releases/download/v${DEEPSPEECH_VERSION}/native_client.${ARCH}.cpu.android.tar.xz"
+    echo $deepspeech_url
+    wget deepspeech_url -O ./native_client.tar.xz -q --show-progress
     echo "Extracting ./native_client.tar.xz ..."
     tar xf ./native_client.tar.xz
     rm -f ./native_client.tar.xz
@@ -77,7 +79,7 @@ fi
 DETECTED_DEEPSPEECH_VERSION=$(LD_LIBRARY_PATH="$LD_LIBRARY_PATH" ./deepspeech-bin/deepspeech --version 2>&1 | grep DeepSpeech | cut -d "v" -f2 | cut -d "-" -f1)
 
 if [ "$DEEPSPEECH_VERSION" != "$DETECTED_DEEPSPEECH_VERSION" ]; then
-    echo "Not the good version. Downloading deepspeech, example-audio and models..."
+    echo "Versions doesn't match. Downloading deepspeech, example-audio and models..."
     download_deepspeech
     download_example_audio
     download_models
