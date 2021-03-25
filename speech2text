@@ -67,13 +67,15 @@ download_models() {
     # rm -f ./models/._*
 }
 ensure_requirements_installed
-if [ ! -f ./deepspeech-bin/deepspeech ]; then
+if [ ! -e ./deepspeech-bin/deepspeech ]; then
+    echo "DeepSpeech doesn't found. Downloading ..."
     download_deepspeech
 fi
 
 DETECTED_DEEPSPEECH_VERSION=$(LD_LIBRARY_PATH="$LD_LIBRARY_PATH" ./deepspeech-bin/deepspeech --version 2>&1 | grep DeepSpeech | cut -d "v" -f2 | cut -d "-" -f1)
 
 if [ "$DEEPSPEECH_VERSION" != "$DETECTED_DEEPSPEECH_VERSION" ]; then
+    echo "Not the good version. Downloading deepspeech, example-audio and models..."
     download_deepspeech
     download_example_audio
     download_models
@@ -81,7 +83,8 @@ fi
 
 ls ./audio/*.wav &> /dev/null || download_example_audio
 
-if [ ! -f ./models/output_graph.tflite ]; then
+if [ ! -e ./models/output_graph.tflite ]; then
+    echo "Models doesn't found. Downloading ..."
     download_models
 fi
 
